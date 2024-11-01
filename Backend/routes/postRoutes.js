@@ -8,15 +8,16 @@ const {
   updatePost,
   deletePost,
 } = require("../controllers/postController");
+const verifyToken = require("../middlewares/authMiddleware");
 
 router.get("/", getAllPosts);
 
 router.get("/:id", getPostById);
 
-router.post("/", createPost);
+router.post("/", verifyToken, createPost);
 
-router.put("/:id", updatePost);
+router.put("/:id", verifyToken, updatePost);
 
-router.delete("/:id", deletePost);
+router.delete("/:id", verifyToken, deletePost);
 
 module.exports = router;
