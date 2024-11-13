@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { loginUser } from "../services/api";
+import { useNavigate, Link } from "react-router-dom";
 
 const Auth = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -16,6 +18,8 @@ const Auth = ({ setToken }) => {
       setEmail("");
       setPassword("");
       setError("");
+
+      navigate("/");
     } catch (error) {
       setError("Invalid email or password, Please try again");
       console.log("Login failed:", error);
@@ -50,6 +54,10 @@ const Auth = ({ setToken }) => {
       />
 
       <button onClick={handleLogin}>Login</button>
+
+      <button>
+        <Link to='/signup'>Sign Up</Link>
+      </button>
     </div>
   );
 };

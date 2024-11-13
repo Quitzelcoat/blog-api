@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUpUser } from "../services/api";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const Signup = () => {
     username: "",
   });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = async (e) => {
     const { name, value } = e.target;
@@ -19,8 +21,11 @@ const Signup = () => {
     try {
       const response = await signUpUser(formData);
       setMessage("Signup successful! You can now log in.", response);
+
+      navigate("/login");
     } catch (error) {
       setMessage("Signup failed. Please try again.", error);
+      console.log("Signup error:", error);
     }
   };
 
@@ -57,6 +62,10 @@ const Signup = () => {
 
         <button type='submit'>sign Up</button>
       </form>
+
+      <button>
+        <Link to='/login'>LogIn</Link>
+      </button>
 
       <p>{message}</p>
     </div>
