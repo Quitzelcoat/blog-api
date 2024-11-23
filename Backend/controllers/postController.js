@@ -54,6 +54,19 @@ exports.updatePost = async (req, res) => {
   }
 };
 
+exports.patchPost = async (req, res) => {
+  try {
+    const updatedPost = await prisma.post.update({
+      where: { id: parseInt(req.params.id) },
+      data: req.body, // Only updates the fields provided in the request body
+    });
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(500).json({ message: "Error partially updating the post" });
+  }
+};
+
 exports.deletePost = async (req, res) => {
   try {
     await prisma.post.delete({ where: { id: parseInt(req.params.id) } });

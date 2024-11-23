@@ -15,6 +15,11 @@ export const createPost = async (postData, token) => {
 };
 
 export const updatePost = async (postId, postData, token) => {
+  if (!token) {
+    console.error("Token is missing! Ensure it's passed correctly.");
+    throw new Error("Authorization token is missing.");
+  }
+
   const response = await axios.post(`${API_URL}/posts/${postId}`, postData, {
     headers: { Authorization: `Bearer ${token}` },
   });
