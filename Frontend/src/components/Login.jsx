@@ -13,6 +13,7 @@ const Auth = ({ setToken }) => {
     try {
       const { token } = await loginUser({ email, password });
       setToken(token);
+
       localStorage.setItem("token", token);
 
       setEmail("");

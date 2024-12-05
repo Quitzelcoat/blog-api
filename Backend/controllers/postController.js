@@ -28,11 +28,15 @@ exports.getPostById = async (req, res) => {
 
 exports.createPost = async (req, res) => {
   try {
+    const { title, content } = req.body;
+    const authorId = req.user.userId;
+    console.log(authorId);
+
     const newPost = await prisma.post.create({
       data: {
-        title: req.body.title,
-        content: req.body.content,
-        authorId: req.body.authorId,
+        title,
+        content,
+        authorId,
       },
     });
     res.status(201).json(newPost);

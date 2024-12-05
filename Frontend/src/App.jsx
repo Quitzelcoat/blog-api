@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import PostsList from "./components/PostsList";
+import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+
+import Authoring from "./components/Authoring";
+import NewPost from "./components/NewPost";
+import EditPost from "./components/EditPost";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -21,14 +24,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path='/'
-          element={
-            <ProtectedRoute token={token}>
-              <PostsList setToken={setToken} />
-            </ProtectedRoute>
-          }
-        />
+        <Route path='/' element={<Dashboard setToken={setToken} />} />
 
         <Route
           path='/signup'
@@ -47,6 +43,10 @@ function App() {
             </PublicRoute>
           }
         />
+
+        <Route path='/posts' element={<Authoring token={token} />} />
+        <Route path='/posts/new' element={<NewPost token={token} />} />
+        <Route path='/posts/edit/:id' element={<EditPost token={token} />} />
       </Routes>
     </Router>
   );
