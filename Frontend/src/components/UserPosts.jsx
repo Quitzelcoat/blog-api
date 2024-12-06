@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { fetchUserPosts, deletePost, togglePublishPost } from "../services/api";
+import { Link } from "react-router-dom";
 
 function UserPosts({ token }) {
   const [posts, setPosts] = useState([]);
@@ -40,7 +41,9 @@ function UserPosts({ token }) {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <h3>{post.title}</h3>
+            <h3>
+              <Link to={`/posts/${post.id}`}>{post.title}</Link>
+            </h3>
             <p>Status: {post.published ? "Published" : "Unpublished"}</p>
             <button
               onClick={() => handleTogglePublish(post.id, post.published)}

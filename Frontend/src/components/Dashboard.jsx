@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { fetchPosts, logoutUser } from "../services/api";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({ setToken }) => {
   const [posts, setPosts] = useState([]);
@@ -57,7 +58,9 @@ const Dashboard = ({ setToken }) => {
 
       {posts.map((post) => (
         <div key={post.id}>
-          <h2>{post.title}</h2>
+          <h2>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
+          </h2>
           <p>{post.content}</p>
         </div>
       ))}
