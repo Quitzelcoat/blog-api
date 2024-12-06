@@ -8,6 +8,13 @@ export const fetchPosts = async () => {
   return response.data;
 };
 
+export const fetchUserPosts = async (token) => {
+  const response = await axios.get(`${API_URL}/posts/user/posts`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+};
+
 export const createPost = async (postData, token) => {
   const response = await axios.post(`${API_URL}/posts`, postData, {
     headers: { Authorization: `Bearer ${token}` },

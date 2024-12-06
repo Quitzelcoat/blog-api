@@ -26,6 +26,44 @@ exports.getPostById = async (req, res) => {
   }
 };
 
+exports.getPostsByUser = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const userPosts = await prisma.post.findMany({
+      where: {
+        authorId: userId,
+      },
+    });
+
+    res.status(200).json(userPosts);
+  } catch (error) {
+    console.error("Error retrieving user posts:", error);
+    res.status(500).json({ message: "Error retrieving user posts" });
+  }
+};
+
+// exports.getPostsByUserId = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     const userPosts = await prisma.post.findMany({
+//       where: {
+//         authorId: parseInt(id),
+//       },
+//     });
+
+//     if (userPosts.length === 0) {
+//       return res.status(404).json({ message: "No posts found for this user" });
+//     }
+
+//     res.status(200).json(userPosts);
+//   } catch (error) {
+//     console.error("Error retrieving posts by user ID:", error);
+//     res.status(500).json({ message: "Error retrieving posts by user ID" });
+//   }
+// };
+
 exports.createPost = async (req, res) => {
   try {
     const { title, content } = req.body;

@@ -1,17 +1,22 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { fetchPosts, deletePost, togglePublishPost } from "../services/api";
+import { fetchUserPosts, deletePost, togglePublishPost } from "../services/api";
 
 function UserPosts({ token }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    async function getPosts() {
-      const data = await fetchPosts();
-      setPosts(data);
+    async function getUserPosts() {
+      try {
+        const data = await fetchUserPosts(token);
+        setPosts(data);
+      } catch (error) {
+        console.error("Error fetching user posts:", error);
+      }
     }
-    getPosts();
-  }, []);
+
+    getUserPosts();
+  }, [token]);
 
   const handleDelete = async (postId) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
@@ -31,6 +36,7 @@ function UserPosts({ token }) {
       <button onClick={() => (window.location.href = "/posts/new")}>
         New Post
       </button>
+      <button onClick={() => (window.location.href = "/")}>All Posts</button>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
