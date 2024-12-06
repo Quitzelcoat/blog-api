@@ -5,9 +5,6 @@ const {
   getAllPosts,
   getPostById,
   getPostsByUser,
-
-  // getPostsByUserId,
-
   createPost,
   updatePost,
   patchPost,
@@ -20,8 +17,6 @@ router.get("/", getAllPosts);
 router.get("/:id", getPostById);
 
 router.get("/user/posts", verifyToken, getPostsByUser);
-
-// router.get("/user/:id/posts", getPostsByUserId);
 
 router.post("/", verifyToken, createPost);
 
