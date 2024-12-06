@@ -5,8 +5,7 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import PublicRoute from "./components/PublicRoute";
-
-import Authoring from "./components/Authoring";
+import UserPosts from "./components/UserPosts";
 import NewPost from "./components/NewPost";
 import EditPost from "./components/EditPost";
 
@@ -44,7 +43,7 @@ function App() {
           }
         />
 
-        <Route path='/posts' element={<Authoring token={token} />} />
+        <Route path='/posts' element={<UserPosts token={token} />} />
         <Route path='/posts/new' element={<NewPost token={token} />} />
         <Route path='/posts/edit/:id' element={<EditPost token={token} />} />
       </Routes>

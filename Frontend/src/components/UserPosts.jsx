@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { fetchPosts, deletePost, togglePublishPost } from "../services/api";
 
-function Authoring({ token }) {
+function UserPosts({ token }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -54,4 +54,4 @@ function Authoring({ token }) {
   );
 }
 
-export default Authoring;
+export default UserPosts;

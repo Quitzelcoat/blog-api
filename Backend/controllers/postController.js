@@ -62,7 +62,7 @@ exports.patchPost = async (req, res) => {
   try {
     const updatedPost = await prisma.post.update({
       where: { id: parseInt(req.params.id) },
-      data: req.body, // Only updates the fields provided in the request body
+      data: req.body,
     });
 
     res.status(200).json(updatedPost);

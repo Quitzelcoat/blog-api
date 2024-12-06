@@ -22,7 +22,7 @@ function EditPost({ token }) {
     e.preventDefault();
     const updatedPost = { title, content };
     await updatePost(id, updatedPost, token);
-    window.location.href = "/authoring";
+    window.location.href = "/posts";
   };
 
   return (
