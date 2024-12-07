@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchPosts, updatePost } from "../services/api";
+import { fetchPosts, updatePost } from "../services/postsApi";
 
 function EditPost({ token }) {
   const { id } = useParams();

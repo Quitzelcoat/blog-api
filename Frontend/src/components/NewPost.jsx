@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { createPost } from "../services/api";
+import { createPost } from "../services/postsApi";
 
 function NewPost({ token }) {
   const [title, setTitle] = useState("");

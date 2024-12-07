@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { fetchPosts, logoutUser } from "../services/api";
+import { fetchPosts } from "../services/postsApi";
+import { logoutUser } from "../services/userApi";
 import { Link } from "react-router-dom";
 
 const Dashboard = ({ setToken }) => {

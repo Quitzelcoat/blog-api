@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchPostById } from "../services/api";
+import { fetchPostById } from "../services/postsApi";
 import Comments from "./Comment";
 
 function PostDetail({ token }) {

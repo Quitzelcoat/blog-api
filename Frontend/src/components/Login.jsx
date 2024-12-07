@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { loginUser } from "../services/api";
+import { loginUser } from "../services/userApi";
 import { useNavigate, Link } from "react-router-dom";
 
 const Auth = ({ setToken }) => {

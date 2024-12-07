@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { fetchUserPosts, deletePost, togglePublishPost } from "../services/api";
+import {
+  fetchUserPosts,
+  deletePost,
+  togglePublishPost,
+} from "../services/postsApi";
 import { Link } from "react-router-dom";
 
 function UserPosts({ token }) {

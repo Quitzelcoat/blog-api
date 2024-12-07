@@ -5,7 +5,7 @@ import {
   createComment,
   updateComment,
   deleteComment,
-} from "../services/api";
+} from "../services/commentApi";
 
 function Comments({ postId, token }) {
   const [comments, setComments] = useState([]);
@@ -84,6 +84,7 @@ function Comments({ postId, token }) {
           ) : (
             <>
               <p>{comment.content}</p>
+
               <button
                 onClick={() => {
                   setEditingComment(comment);
