@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPostById } from "../services/api";
+import Comments from "./Comment";
 
-function PostDetail() {
+function PostDetail({ token }) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,6 +36,8 @@ function PostDetail() {
       <p>
         <strong>Author:</strong> {post.author.username}
       </p>
+
+      <Comments postId={id} token={token} />
     </div>
   );
 }

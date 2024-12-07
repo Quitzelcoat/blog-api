@@ -16,7 +16,11 @@ exports.getComments = async (req, res) => {
 
 exports.createComments = async (req, res) => {
   try {
-    const { content, authorId, postId } = req.body;
+    const { content } = req.body;
+    const postId = req.params.postId;
+
+    const authorId = req.user?.userId;
+    console.log(req.user);
 
     if (!content) {
       return res.status(400).json({ message: "Content is required" });
@@ -30,7 +34,7 @@ exports.createComments = async (req, res) => {
       data: {
         content: content,
         postId: parseInt(postId),
-        authorId: authorId || null,
+        authorId: authorId,
       },
     });
 
@@ -40,6 +44,23 @@ exports.createComments = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error creating comment", error: error.message });
+  }
+};
+
+exports.updateComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    const updatedComment = await prisma.comment.update({
+      where: { id: parseInt(id) },
+      data: { content },
+    });
+
+    res.status(200).json(updatedComment);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error updating comment" });
   }
 };
 

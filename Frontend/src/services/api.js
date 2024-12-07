@@ -3,6 +3,27 @@ import axios from "axios";
 const API_URL = "http://localhost:3000";
 
 // Login Users api
+export const signUpUser = async (userData) => {
+  const response = await axios.post(`${API_URL}/users`, userData);
+  return response.data;
+};
+
+export const loginUser = async (userData) => {
+  const response = await axios.post(`${API_URL}/users/login`, userData);
+  return response.data;
+};
+
+export const logoutUser = async (token) => {
+  return axios.post(
+    `${API_URL}/users/logout`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
+
+// Posts api
 export const fetchPosts = async () => {
   const response = await axios.get(`${API_URL}/posts`);
   return response.data;
@@ -27,27 +48,6 @@ export const createPost = async (postData, token) => {
   return response.data;
 };
 
-export const signUpUser = async (userData) => {
-  const response = await axios.post(`${API_URL}/users`, userData);
-  return response.data;
-};
-
-export const loginUser = async (userData) => {
-  const response = await axios.post(`${API_URL}/users/login`, userData);
-  return response.data;
-};
-
-export const logoutUser = async (token) => {
-  return axios.post(
-    `${API_URL}/users/logout`,
-    {},
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-};
-
-// Posts api
 export const updatePost = async (postId, postData, token) => {
   if (!token) {
     console.error("Token is missing! Ensure it's passed correctly.");
@@ -77,22 +77,30 @@ export const togglePublishPost = async (postId, isPublished, token) => {
 
 // Comments api
 export const fetchComments = async (postId) => {
-  const response = await axios.get(`${API_URL}/post/${postId}/comments`);
+  const response = await axios.get(`${API_URL}/comments/${postId}`);
   return response.data;
 };
 
-export const updateComments = async (commentId, updateData, token) => {
+export const createComment = async (postId, content, token) => {
+  console.log(postId);
+  const response = await axios.post(`${API_URL}/comments/${postId}`, content, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+};
+
+export const updateComment = async (commentId, content, token) => {
   const response = await axios.put(
     `${API_URL}/comments/${commentId}`,
-    updateData,
+    { content },
     {
-      headers: { Authorization: `Bearer ${token} ` },
+      headers: { Authorization: `Bearer ${token}` },
     }
   );
   return response.data;
 };
 
-export const deleteComments = async (commentId, token) => {
+export const deleteComment = async (commentId, token) => {
   const response = await axios.delete(`${API_URL}/comments/${commentId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });

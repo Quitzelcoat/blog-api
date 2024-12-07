@@ -3,13 +3,17 @@ const router = express.Router();
 const {
   getComments,
   createComments,
+  updateComment,
   deleteComment,
 } = require("../controllers/commentController");
+const verifyToken = require("../middlewares/authMiddleware");
 
-router.get("/post/:postId", getComments);
+router.get("/:postId", getComments);
 
-router.post("/post/:postId", createComments);
+router.post("/:postId", verifyToken, createComments);
 
-router.delete("/:id", deleteComment);
+router.put("/:id", verifyToken, updateComment);
+
+router.delete("/:id", verifyToken, deleteComment);
 
 module.exports = router;

@@ -50,7 +50,6 @@ exports.createPost = async (req, res) => {
   try {
     const { title, content } = req.body;
     const authorId = req.user.userId;
-    console.log(authorId);
 
     const newPost = await prisma.post.create({
       data: {

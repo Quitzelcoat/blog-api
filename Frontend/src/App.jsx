@@ -46,7 +46,7 @@ function App() {
 
         <Route path='/posts' element={<UserPosts token={token} />} />
 
-        <Route path='/posts/:id' element={<PostDetail />} />
+        <Route path='/posts/:id' element={<PostDetail token={token} />} />
 
         <Route path='/posts/new' element={<NewPost token={token} />} />
 
