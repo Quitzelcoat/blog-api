@@ -7,7 +7,7 @@ import {
   deleteComment,
 } from "../services/commentApi";
 
-function Comments({ postId, token }) {
+function Comments({ postId, token, isLoggedIn, userId }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [editingComment, setEditingComment] = useState(null);
@@ -83,29 +83,42 @@ function Comments({ postId, token }) {
             </>
           ) : (
             <>
-              <p>{comment.content}</p>
+              <p>
+                <strong>{comment.username}</strong>: {comment.content}
+              </p>
 
-              <button
-                onClick={() => {
-                  setEditingComment(comment);
-                  setEditContent(comment.content);
-                }}
-              >
-                Edit
-              </button>
-              <button onClick={() => handleDeleteComment(comment.id)}>
-                Delete
-              </button>
+              {isLoggedIn && comment.authorId === userId && (
+                <>
+                  <button
+                    onClick={() => {
+                      setEditingComment(comment);
+                      setEditContent(comment.content);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => handleDeleteComment(comment.id)}>
+                    Delete
+                  </button>
+                </>
+              )}
             </>
           )}
         </div>
       ))}
-      <textarea
-        placeholder='Add a comment'
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-      />
-      <button onClick={handleAddComment}>Submit</button>
+
+      {isLoggedIn ? (
+        <>
+          <textarea
+            placeholder='Add a comment'
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <button onClick={handleAddComment}>Submit</button>
+        </>
+      ) : (
+        <p>Login to add comments</p>
+      )}
     </div>
   );
 }

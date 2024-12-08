@@ -5,9 +5,21 @@ exports.getComments = async (req, res) => {
   try {
     const comments = await prisma.comment.findMany({
       where: { postId: parseInt(req.params.postId) },
+      include: {
+        User: {
+          select: {
+            username: true,
+          },
+        },
+      },
     });
 
-    res.status(200).json(comments);
+    const commentsWithUsername = comments.map((comment) => ({
+      ...comment,
+      username: comment.User ? comment.User.username : null,
+    }));
+
+    res.status(200).json(commentsWithUsername);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error retrieving comments" });
@@ -20,15 +32,6 @@ exports.createComments = async (req, res) => {
     const postId = req.params.postId;
 
     const authorId = req.user?.userId;
-    console.log(req.user);
-
-    if (!content) {
-      return res.status(400).json({ message: "Content is required" });
-    }
-
-    if (!postId) {
-      return res.status(400).json({ message: "postId is required" });
-    }
 
     const newComments = await prisma.comment.create({
       data: {
@@ -38,7 +41,19 @@ exports.createComments = async (req, res) => {
       },
     });
 
-    res.status(201).json(newComments);
+    const commentWithUsername = await prisma.comment.findUnique({
+      where: { id: newComments.id },
+      include: {
+        User: {
+          select: { username: true },
+        },
+      },
+    });
+
+    res.status(201).json({
+      ...commentWithUsername,
+      username: commentWithUsername.User?.username || "Anonymous", // Fallback if no user is found
+    });
   } catch (error) {
     console.log(error);
     res
@@ -52,12 +67,19 @@ exports.updateComment = async (req, res) => {
     const { id } = req.params;
     const { content } = req.body;
 
-    const updatedComment = await prisma.comment.update({
-      where: { id: parseInt(id) },
-      data: { content },
+    const commentWithUsername = await prisma.comment.findUnique({
+      where: { id: updatedComment.id },
+      include: {
+        User: {
+          select: { username: true },
+        },
+      },
     });
 
-    res.status(200).json(updatedComment);
+    res.status(200).json({
+      ...commentWithUsername,
+      username: commentWithUsername.User?.username || "Anonymous",
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error updating comment" });

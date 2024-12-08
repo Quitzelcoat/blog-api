@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchPostById } from "../services/postsApi";
 import Comments from "./Comment";
 
-function PostDetail({ token }) {
+function PostDetail({ token, isLoggedIn, userId }) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -37,7 +37,12 @@ function PostDetail({ token }) {
         <strong>Author:</strong> {post.author.username}
       </p>
 
-      <Comments postId={id} token={token} />
+      <Comments
+        postId={id}
+        token={token}
+        isLoggedIn={isLoggedIn}
+        userId={userId}
+      />
     </div>
   );
 }

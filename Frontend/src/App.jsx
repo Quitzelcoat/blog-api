@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
@@ -11,15 +12,21 @@ import PostDetail from "./components/PostDetail";
 import NewPost from "./components/NewPost";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
+      const decoded = jwtDecode(token);
+      setUserId(decoded.userId);
     } else {
       localStorage.removeItem("token");
+      setUserId(null);
     }
   }, [token]);
+
+  const isLoggedIn = !!token;
 
   return (
     <Router>
@@ -46,7 +53,12 @@ function App() {
 
         <Route path='/posts' element={<UserPosts token={token} />} />
 
-        <Route path='/posts/:id' element={<PostDetail token={token} />} />
+        <Route
+          path='/posts/:id'
+          element={
+            <PostDetail token={token} isLoggedIn={isLoggedIn} userId={userId} />
+          }
+        />
 
         <Route path='/posts/new' element={<NewPost token={token} />} />
 
