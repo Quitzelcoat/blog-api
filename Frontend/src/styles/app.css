@@ -1,0 +1,77 @@
+:root {
+  /* Brand */
+  --brand: #3a5f7d; /* muted ink blue */
+  --brand-soft: #e1edf5;
+  --accent: #c99a5b; /* warm, classic gold */
+
+  /* Backgrounds */
+  --bg-primary: #f7f4f0; /* paper-like */
+  --bg-secondary: #ffffff;
+  --bg-elevated: #fcfaf7;
+
+  /* Text */
+  --text-primary: #222222;
+  --text-secondary: rgba(34, 34, 34, 0.65);
+  --text-muted: rgba(34, 34, 34, 0.45);
+
+  /* Borders & lines */
+  --border-subtle: rgba(34, 34, 34, 0.08);
+  --border-strong: rgba(34, 34, 34, 0.14);
+
+  /* Effects */
+  --shadow-soft: 0 18px 45px rgba(12, 23, 38, 0.08);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --transition-fast: 150ms ease-out;
+  --transition-med: 220ms ease-out;
+}
+
+/* Dark theme (perfectly reversible) */
+html.dark {
+  --brand: #d0e3f5;
+  --brand-soft: #1e2a36;
+  --accent: #e0b86b;
+
+  --bg-primary: #070a0e;
+  --bg-secondary: #0f141b;
+  --bg-elevated: #151c25;
+
+  --text-primary: #f7f4f0;
+  --text-secondary: rgba(247, 244, 240, 0.78);
+  --text-muted: rgba(247, 244, 240, 0.48);
+
+  --border-subtle: rgba(247, 244, 240, 0.06);
+  --border-strong: rgba(247, 244, 240, 0.18);
+
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+}
+
+/* Base */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'Inter', 'Segoe UI', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--transition-med),
+    color var(--transition-med);
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}

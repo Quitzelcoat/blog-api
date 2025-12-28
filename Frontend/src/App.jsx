@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Dashboard from './pages/HomePage/Dashboard';
+import Login from './pages/AuthPage/Login';
+import Signup from './pages/AuthPage/Signup';
 import PublicRoute from './components/PublicRoute';
 import UserPosts from './components/UserPosts';
 import EditPost from './components/EditPost';
