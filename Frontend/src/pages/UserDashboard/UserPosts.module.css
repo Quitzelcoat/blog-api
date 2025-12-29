@@ -1,0 +1,316 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  padding: 0 5vw 64px;
+}
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  min-width: 140px;
+}
+
+.backLink {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+}
+
+.backLink:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #0b2030 0%, #142935 100%); /* deep navy */
+  color: #fbf9f7;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(8, 18, 28, 0.25);
+  transition: transform var(--transition-med), box-shadow var(--transition-med),
+    opacity var(--transition-fast);
+}
+
+.primaryButton:hover,
+.primaryButton:active {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(8, 18, 28, 0.32);
+  opacity: 0.98;
+}
+
+.primaryButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px rgba(203, 183, 126, 0.12);
+  transform: translateY(-1px);
+}
+
+html.dark .primaryButton {
+  background: linear-gradient(135deg, #173043 0%, #0b1b26 100%);
+  color: #fbf9f7;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+}
+
+/* Posts grid */
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px;
+}
+
+/* Post cards */
+.postCard {
+  padding: 24px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-med);
+  display: flex;
+  flex-direction: column;
+}
+
+.postCard:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-4px);
+}
+
+.postHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.postTitle {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.postTitle:hover {
+  color: var(--brand);
+}
+
+.statusGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusIndicator {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.statusIndicator.published {
+  background-color: var(--brand-soft);
+  color: var(--brand);
+}
+
+.statusIndicator.draft {
+  background-color: rgba(201, 154, 91, 0.1);
+  color: var(--accent);
+}
+
+.postActions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.toggleButton {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast), background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.toggleButton:hover {
+  transform: translateY(-1px);
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.toggleButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+  background: var(--bg-primary);
+}
+
+.toggleButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--brand-soft);
+}
+
+.editButton {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast), background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.editButton:hover {
+  transform: translateY(-1px);
+  background-color: var(--bg-primary);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.editButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--brand-soft);
+}
+
+.deleteButton {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background-color: transparent;
+  color: #c25353;
+  border: 1px solid rgba(194, 83, 83, 0.3);
+}
+
+.deleteButton:hover {
+  background-color: rgba(194, 83, 83, 0.1);
+  border-color: #c25353;
+  color: #a13f3f;
+}
+
+/* Empty state */
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 64px 32px;
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-elevated);
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .actions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .postsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .page {
+    padding: 0 16px 48px;
+  }
+}
