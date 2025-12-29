@@ -1,0 +1,144 @@
+.page {
+  min-height: 100vh;
+  padding: 48px 5vw 64px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--bg-primary);
+}
+
+/* Header with back button + meta */
+.header {
+  margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+  width: fit-content;
+}
+
+.backButton:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Better author meta */
+.postMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.authorName {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.postDate {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* Main content area */
+.content {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: clamp(32px, 5vw, 44px);
+  line-height: 1.15;
+  margin-bottom: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  max-width: 680px;
+}
+
+.body p {
+  margin-bottom: 1.2em;
+}
+
+.body *:last-child {
+  margin-bottom: 0;
+}
+
+/* Comments section */
+.commentsSection {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 40px;
+}
+
+/* Loading & Error states */
+.loading,
+.error {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.error {
+  color: #c25353;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page {
+    padding: 32px 20px 48px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .postMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

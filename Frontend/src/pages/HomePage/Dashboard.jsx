@@ -1,18 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { fetchPosts } from '../../services/postsApi';
-import { logoutUser } from '../../services/userApi';
 import { Link } from 'react-router-dom';
+import { fetchPosts } from '../../services/postsApi';
+import Navbar from '../../components/Navbar/Navbar';
 import styles from './Dashboard.module.css';
 
-const Dashboard = ({ setToken }) => {
+const Dashboard = ({ setToken, token }) => {
   const [posts, setPosts] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) setIsLoggedIn(true);
-
     const getPosts = async () => {
       try {
         const data = await fetchPosts();
@@ -22,56 +18,12 @@ const Dashboard = ({ setToken }) => {
         console.error('Failed to fetch posts:', error);
       }
     };
-
     getPosts();
   }, []);
 
-  const handleLogout = () => {
-    const token = localStorage.getItem('token');
-    logoutUser(token);
-    setToken(null);
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-  };
-
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.brand}>
-          <span className={styles.logoDot} />
-          <span className={styles.logoText}>Paperlane</span>
-        </div>
-
-        <nav className={styles.nav}>
-          {isLoggedIn && (
-            <Link to="/posts" className={styles.link}>
-              My posts
-            </Link>
-          )}
-
-          {!isLoggedIn && (
-            <Link to="/login" className={styles.link}>
-              Login
-            </Link>
-          )}
-
-          {!isLoggedIn && (
-            <Link to="/signup" className={styles.buttonOutline}>
-              Sign up
-            </Link>
-          )}
-
-          {isLoggedIn && (
-            <button
-              type="button"
-              onClick={handleLogout}
-              className={styles.buttonOutline}
-            >
-              Logout
-            </button>
-          )}
-        </nav>
-      </header>
+      <Navbar setToken={setToken} token={token} />
 
       <main className={styles.main}>
         <section className={styles.intro}>

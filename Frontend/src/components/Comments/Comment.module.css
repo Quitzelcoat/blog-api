@@ -1,0 +1,232 @@
+.section {
+  margin-top: 24px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Comment list */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.comment {
+  padding: 16px 20px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.comment:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Comment meta: avatar + author */
+.meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: var(--brand);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.metaText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.time {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Comment body */
+.body {
+  margin-bottom: 12px;
+}
+
+.content {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+/* Edit form */
+.editForm {
+  animation: slideDown 200ms ease-out;
+}
+
+.editTextarea,
+.newTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+  outline: none;
+}
+
+.editTextarea:focus,
+.newTextarea:focus {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.editActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.editSave,
+.editCancel,
+.submitButton,
+.actionButton {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+}
+
+.editSave,
+.submitButton {
+  background-color: var(--brand);
+  color: white;
+}
+
+.editSave:hover,
+.submitButton:hover:not(:disabled) {
+  background-color: #222;
+  transform: translateY(-1px);
+}
+
+.editCancel,
+.actionButton {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.editCancel:hover,
+.actionButton:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Actions footer */
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* New comment form */
+.newCommentForm {
+  margin-top: 8px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Login prompt link */
+.loginPrompt {
+  padding: 20px;
+  text-align: center;
+  border: 1px dashed var(--border-subtle);
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.loginLink {
+  color: var(--brand);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}
+
+/* Consistent author styling */
+.author {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    height: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    height: auto;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .meta {
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+}

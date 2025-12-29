@@ -8,7 +8,7 @@ import Signup from './pages/AuthPage/Signup';
 import PublicRoute from './components/PublicRoute';
 import UserPosts from './components/UserPosts';
 import EditPost from './components/EditPost';
-import PostDetail from './components/PostDetail';
+import PostDetail from './pages/PostsPage/PostDetail';
 import NewPost from './components/NewPost';
 
 function App() {
