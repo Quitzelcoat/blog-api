@@ -5,6 +5,18 @@ import { fetchPosts } from '../../services/postsApi';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from './Dashboard.module.css';
 
+const getExcerpt = (htmlContent) => {
+  if (!htmlContent) return '';
+
+  // Create temp div to parse HTML
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = htmlContent;
+
+  // Get text content and truncate
+  let text = tempDiv.textContent || tempDiv.innerText || '';
+  return text.length > 160 ? text.slice(0, 160) + '…' : text;
+};
+
 const Dashboard = ({ setToken, token }) => {
   const [posts, setPosts] = useState([]);
 
@@ -41,10 +53,14 @@ const Dashboard = ({ setToken, token }) => {
                   {post.title}
                 </Link>
               </h2>
-              <p className={styles.postExcerpt}>
-                {post.content?.slice(0, 160)}
-                {post.content && post.content.length > 160 ? '…' : ''}
-              </p>
+
+              <div
+                className={styles.postExcerpt}
+                dangerouslySetInnerHTML={{
+                  __html: getExcerpt(post.content),
+                }}
+              />
+
               <Link to={`/posts/${post.id}`} className={styles.readLink}>
                 Read more
               </Link>

@@ -7,7 +7,7 @@ import Login from './pages/AuthPage/Login';
 import Signup from './pages/AuthPage/Signup';
 import PublicRoute from './components/PublicRoute';
 import UserPosts from './pages/UserDashboard/UserPosts';
-import EditPost from './components/EditPost';
+import EditPost from './pages/EditPostPage/EditPost';
 import PostDetail from './pages/PostsPage/PostDetail';
 import NewPost from './pages/NewPostPage/NewPost';
 

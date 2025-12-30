@@ -80,6 +80,10 @@
   line-height: 1.6;
   color: var(--text-secondary);
   margin-bottom: 10px;
+  max-height: 4.8em; /* 3 lines approx */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 .readLink {
