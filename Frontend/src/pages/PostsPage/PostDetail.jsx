@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchPostById } from '../../services/postsApi';
+import Navbar from '../../components/Navbar/Navbar';
 import Comments from '../../components/Comments/Comment';
 import styles from './PostDetail.module.css';
 
@@ -29,6 +30,7 @@ function PostDetail({ token, isLoggedIn, userId }) {
   if (loading) {
     return (
       <div className={styles.page}>
+        <Navbar token={token} />
         <div className={styles.loading}>Loading post...</div>
       </div>
     );
@@ -37,6 +39,7 @@ function PostDetail({ token, isLoggedIn, userId }) {
   if (error || !post) {
     return (
       <div className={styles.page}>
+        <Navbar token={token} />
         <div className={styles.error}>{error || 'Post not found.'}</div>
         <Link to="/" className={styles.backLink}>
           ← Back to posts
@@ -46,42 +49,46 @@ function PostDetail({ token, isLoggedIn, userId }) {
   }
 
   return (
-    <article className={styles.page}>
-      {/* Post header */}
-      <header className={styles.header}>
-        <Link to="/" className={styles.backButton}>
-          ← All posts
-        </Link>
+    <div className={styles.page}>
+      <Navbar token={token} />
 
-        <div className={styles.postMeta}>
-          <div className={styles.authorInfo}>
-            <span className={styles.authorName}>
-              {post.author?.username || 'Anonymous'}
-            </span>
-            <span className={styles.postDate}>• Published</span>
+      <article className={styles.article}>
+        {/* Post header */}
+        <header className={styles.header}>
+          <Link to="/" className={styles.backButton}>
+            ← All posts
+          </Link>
+
+          <div className={styles.postMeta}>
+            <div className={styles.authorInfo}>
+              <span className={styles.authorName}>
+                {post.author?.username || 'Anonymous'}
+              </span>
+              <span className={styles.postDate}>• Published</span>
+            </div>
           </div>
+        </header>
+
+        {/* Main content */}
+        <div className={styles.content}>
+          <h1 className={styles.title}>{post.title}</h1>
+          <div
+            className={styles.body}
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </div>
-      </header>
 
-      {/* Main content */}
-      <div className={styles.content}>
-        <h1 className={styles.title}>{post.title}</h1>
-        <div
-          className={styles.body}
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      </div>
-
-      {/* Comments section */}
-      <section className={styles.commentsSection}>
-        <Comments
-          postId={id}
-          token={token}
-          isLoggedIn={isLoggedIn}
-          userId={userId}
-        />
-      </section>
-    </article>
+        {/* Comments section */}
+        <section className={styles.commentsSection}>
+          <Comments
+            postId={id}
+            token={token}
+            isLoggedIn={isLoggedIn}
+            userId={userId}
+          />
+        </section>
+      </article>
+    </div>
   );
 }
 
