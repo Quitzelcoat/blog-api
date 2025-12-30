@@ -9,7 +9,7 @@ import PublicRoute from './components/PublicRoute';
 import UserPosts from './pages/UserDashboard/UserPosts';
 import EditPost from './components/EditPost';
 import PostDetail from './pages/PostsPage/PostDetail';
-import NewPost from './components/NewPost';
+import NewPost from './pages/NewPostPage/NewPost';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
