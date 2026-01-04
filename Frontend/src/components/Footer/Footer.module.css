@@ -1,0 +1,63 @@
+.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.brandBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Reuse navbar logo visual language */
+.logoDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: var(--brand);
+}
+
+.brandText {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.divider {
+  opacity: 0.5;
+}
+
+.text {
+  color: var(--text-muted);
+}
+
+.copy {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Stack on small screens */
+@media (max-width: 600px) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .copy {
+    white-space: normal;
+  }
+}

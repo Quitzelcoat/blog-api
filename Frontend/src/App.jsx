@@ -10,6 +10,7 @@ import UserPosts from './pages/UserDashboard/UserPosts';
 import EditPost from './pages/EditPostPage/EditPost';
 import PostDetail from './pages/PostsPage/PostDetail';
 import NewPost from './pages/NewPostPage/NewPost';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -20,7 +21,6 @@ function App() {
       try {
         const decoded = jwtDecode(token);
 
-        // Check if token expired
         if (decoded.exp * 1000 < Date.now()) {
           console.log('Token expired, logging out...');
           localStorage.removeItem('token');
@@ -47,40 +47,53 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Dashboard setToken={setToken} />} />
+      <div className="app-shell">
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<Dashboard setToken={setToken} />} />
 
-        <Route
-          path="/signup"
-          element={
-            <PublicRoute token={token}>
-              <Signup setToken={setToken} />
-            </PublicRoute>
-          }
-        />
+            <Route
+              path="/signup"
+              element={
+                <PublicRoute token={token}>
+                  <Signup setToken={setToken} />
+                </PublicRoute>
+              }
+            />
 
-        <Route
-          path="/login"
-          element={
-            <PublicRoute token={token}>
-              <Login setToken={setToken} />
-            </PublicRoute>
-          }
-        />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute token={token}>
+                  <Login setToken={setToken} />
+                </PublicRoute>
+              }
+            />
 
-        <Route path="/posts" element={<UserPosts token={token} />} />
+            <Route path="/posts" element={<UserPosts token={token} />} />
 
-        <Route
-          path="/posts/:id"
-          element={
-            <PostDetail token={token} isLoggedIn={isLoggedIn} userId={userId} />
-          }
-        />
+            <Route
+              path="/posts/:id"
+              element={
+                <PostDetail
+                  token={token}
+                  isLoggedIn={isLoggedIn}
+                  userId={userId}
+                />
+              }
+            />
 
-        <Route path="/posts/new" element={<NewPost token={token} />} />
+            <Route path="/posts/new" element={<NewPost token={token} />} />
 
-        <Route path="/posts/edit/:id" element={<EditPost token={token} />} />
-      </Routes>
+            <Route
+              path="/posts/edit/:id"
+              element={<EditPost token={token} />}
+            />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
     </Router>
   );
 }
