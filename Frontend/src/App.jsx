@@ -17,9 +17,26 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('token', token);
-      const decoded = jwtDecode(token);
-      setUserId(decoded.userId);
+      try {
+        const decoded = jwtDecode(token);
+
+        // Check if token expired
+        if (decoded.exp * 1000 < Date.now()) {
+          console.log('Token expired, logging out...');
+          localStorage.removeItem('token');
+          setToken(null);
+          setUserId(null);
+        } else {
+          localStorage.setItem('token', token);
+          setUserId(decoded.userId);
+        }
+      } catch (error) {
+        console.error('Invalid token, logging out...');
+        localStorage.removeItem('token');
+        setToken(null);
+        setUserId(null);
+        console.log(error);
+      }
     } else {
       localStorage.removeItem('token');
       setUserId(null);

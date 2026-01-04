@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../services/userApi';
 import styles from './Navbar.module.css';
 
 const Navbar = ({ setToken, token }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
@@ -25,15 +27,21 @@ const Navbar = ({ setToken, token }) => {
     document.documentElement.classList.toggle('dark');
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     const savedToken = localStorage.getItem('token');
-    if (savedToken) {
-      // Call logoutUser if it exists in your userApi
-      // logoutUser(savedToken);
+    try {
+      if (savedToken) {
+        // Optional backend call (won’t break if backend isn't running)
+        await logoutUser(savedToken);
+      }
+    } catch (error) {
+      console.log('Error logging out (server-side):', error);
+    } finally {
+      // Always clear client state regardless of server response
+      localStorage.removeItem('token');
+      setToken(null);
+      navigate('/login'); // redirect to login page
     }
-    setToken(null);
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
   };
 
   return (
