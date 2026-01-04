@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import Dashboard from './pages/HomePage/Dashboard';
 import Login from './pages/AuthPage/Login';
 import Signup from './pages/AuthPage/Signup';
-import PublicRoute from './components/PublicRoute';
+import PublicRoute from './services/PublicRoute';
 import UserPosts from './pages/UserDashboard/UserPosts';
 import EditPost from './pages/EditPostPage/EditPost';
 import PostDetail from './pages/PostsPage/PostDetail';
