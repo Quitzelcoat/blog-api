@@ -1,7 +1,6 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma.js';
 
-exports.getComments = async (req, res) => {
+export async function getComments(req, res) {
   try {
     const comments = await prisma.comment.findMany({
       where: { postId: parseInt(req.params.postId) },
@@ -22,11 +21,11 @@ exports.getComments = async (req, res) => {
     res.status(200).json(commentsWithUsername);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error retrieving comments" });
+    res.status(500).json({ message: 'Error retrieving comments' });
   }
-};
+}
 
-exports.createComments = async (req, res) => {
+export async function createComments(req, res) {
   try {
     const { content } = req.body;
     const postId = req.params.postId;
@@ -52,17 +51,17 @@ exports.createComments = async (req, res) => {
 
     res.status(201).json({
       ...commentWithUsername,
-      username: commentWithUsername.User?.username || "Anonymous", // Fallback if no user is found
+      username: commentWithUsername.User?.username || 'Anonymous', // Fallback if no user is found
     });
   } catch (error) {
     console.log(error);
     res
       .status(500)
-      .json({ message: "Error creating comment", error: error.message });
+      .json({ message: 'Error creating comment', error: error.message });
   }
-};
+}
 
-exports.updateComment = async (req, res) => {
+export async function updateComment(req, res) {
   try {
     const { id } = req.params;
     const { content } = req.body;
@@ -78,15 +77,15 @@ exports.updateComment = async (req, res) => {
 
     res.status(200).json({
       ...commentWithUsername,
-      username: commentWithUsername.User?.username || "Anonymous",
+      username: commentWithUsername.User?.username || 'Anonymous',
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error updating comment" });
+    res.status(500).json({ message: 'Error updating comment' });
   }
-};
+}
 
-exports.deleteComment = async (req, res) => {
+export async function deleteComment(req, res) {
   try {
     const commentId = parseInt(req.params.id);
 
@@ -94,9 +93,9 @@ exports.deleteComment = async (req, res) => {
       where: { id: commentId },
     });
 
-    res.status(200).json({ message: "Comment deleted successfully" });
+    res.status(200).json({ message: 'Comment deleted successfully' });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error deleting Comment" });
+    res.status(500).json({ message: 'Error deleting Comment' });
   }
-};
+}

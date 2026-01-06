@@ -1,11 +1,11 @@
-// routes/userRoutes.js
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const userController = require("../controllers/userController");
-const verifyToken = require("../middlewares/authMiddleware");
 
-router.post("/", userController.createUser);
-router.post("/login", userController.loginUser);
-router.post("/logout", verifyToken, userController.logoutUser);
+import * as userController from '../controllers/userController.js';
+import verifyToken from '../middlewares/authMiddleware.js';
 
-module.exports = router;
+router.post('/', userController.createUser);
+router.post('/login', userController.loginUser);
+router.post('/logout', verifyToken, userController.logoutUser);
+
+export default router;

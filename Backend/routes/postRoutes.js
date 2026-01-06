@@ -1,7 +1,7 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
 
-const {
+import {
   getAllPosts,
   getPostById,
   getPostsByUser,
@@ -9,21 +9,22 @@ const {
   updatePost,
   patchPost,
   deletePost,
-} = require("../controllers/postController");
-const verifyToken = require("../middlewares/authMiddleware");
+} from '../controllers/postController.js';
 
-router.get("/", getAllPosts);
+import verifyToken from '../middlewares/authMiddleware.js';
 
-router.get("/:id", getPostById);
+router.get('/', getAllPosts);
 
-router.get("/user/posts", verifyToken, getPostsByUser);
+router.get('/:id', getPostById);
 
-router.post("/", verifyToken, createPost);
+router.get('/user/posts', verifyToken, getPostsByUser);
 
-router.put("/:id", verifyToken, updatePost);
+router.post('/', verifyToken, createPost);
 
-router.patch("/:id", verifyToken, patchPost);
+router.put('/:id', verifyToken, updatePost);
 
-router.delete("/:id", verifyToken, deletePost);
+router.patch('/:id', verifyToken, patchPost);
 
-module.exports = router;
+router.delete('/:id', verifyToken, deletePost);
+
+export default router;

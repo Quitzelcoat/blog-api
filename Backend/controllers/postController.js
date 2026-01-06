@@ -1,16 +1,15 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma.js';
 
-exports.getAllPosts = async (req, res) => {
+export async function getAllPosts(req, res) {
   try {
     const posts = await prisma.post.findMany();
     res.status(200).json(posts);
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving posts" });
+    res.status(500).json({ message: 'Error retrieving posts' });
   }
-};
+}
 
-exports.getPostById = async (req, res) => {
+export async function getPostById(req, res) {
   try {
     const post = await prisma.post.findUnique({
       where: { id: parseInt(req.params.id) },
@@ -20,16 +19,16 @@ exports.getPostById = async (req, res) => {
     });
 
     if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: 'Post not found' });
     }
 
     res.status(200).json(post);
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving posts" });
+    res.status(500).json({ message: 'Error retrieving posts' });
   }
-};
+}
 
-exports.getPostsByUser = async (req, res) => {
+export async function getPostsByUser(req, res) {
   try {
     const userId = req.user.userId;
 
@@ -41,12 +40,12 @@ exports.getPostsByUser = async (req, res) => {
 
     res.status(200).json(userPosts);
   } catch (error) {
-    console.error("Error retrieving user posts:", error);
-    res.status(500).json({ message: "Error retrieving user posts" });
+    console.error('Error retrieving user posts:', error);
+    res.status(500).json({ message: 'Error retrieving user posts' });
   }
-};
+}
 
-exports.createPost = async (req, res) => {
+export async function createPost(req, res) {
   try {
     const { title, content } = req.body;
     const authorId = req.user.userId;
@@ -60,12 +59,12 @@ exports.createPost = async (req, res) => {
     });
     res.status(201).json(newPost);
   } catch (error) {
-    console.error("Error creating post:", error);
-    res.status(500).json({ message: "Error creating the post" });
+    console.error('Error creating post:', error);
+    res.status(500).json({ message: 'Error creating the post' });
   }
-};
+}
 
-exports.updatePost = async (req, res) => {
+export async function updatePost(req, res) {
   try {
     const updatePost = await prisma.post.update({
       where: { id: parseInt(req.params.id) },
@@ -73,11 +72,11 @@ exports.updatePost = async (req, res) => {
     });
     res.status(200).json(updatePost);
   } catch (error) {
-    res.status(500).json({ message: "Error updating posts" });
+    res.status(500).json({ message: 'Error updating posts' });
   }
-};
+}
 
-exports.patchPost = async (req, res) => {
+export async function patchPost(req, res) {
   try {
     const updatedPost = await prisma.post.update({
       where: { id: parseInt(req.params.id) },
@@ -86,15 +85,15 @@ exports.patchPost = async (req, res) => {
 
     res.status(200).json(updatedPost);
   } catch (error) {
-    res.status(500).json({ message: "Error partially updating the post" });
+    res.status(500).json({ message: 'Error partially updating the post' });
   }
-};
+}
 
-exports.deletePost = async (req, res) => {
+export async function deletePost(req, res) {
   try {
     await prisma.post.delete({ where: { id: parseInt(req.params.id) } });
-    res.status(200).json({ message: "Post deleted successfully" });
+    res.status(200).json({ message: 'Post deleted successfully' });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting the post" });
+    res.status(500).json({ message: 'Error deleting the post' });
   }
-};
+}

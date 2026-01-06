@@ -1,11 +1,9 @@
-// controllers/userController.js
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma.js';
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
-exports.createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -24,7 +22,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -59,6 +57,6 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-exports.logoutUser = async (req, res) => {
+export const logoutUser = async (req, res) => {
   res.status(200).json({ message: 'User logged out successfully' });
 };
