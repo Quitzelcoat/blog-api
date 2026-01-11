@@ -1,3 +1,4 @@
+// routes/postRoutes.js
 import express from 'express';
 const router = express.Router();
 
@@ -12,19 +13,18 @@ import {
 } from '../controllers/postController.js';
 
 import verifyToken from '../middlewares/authMiddleware.js';
+import upload from '../middlewares/multer.js';
 
 router.get('/', getAllPosts);
 
-router.get('/:id', getPostById);
-
+// Put the more specific non-parameterized route BEFORE the param route
 router.get('/user/posts', verifyToken, getPostsByUser);
 
-router.post('/', verifyToken, createPost);
+router.get('/:id', getPostById);
 
-router.put('/:id', verifyToken, updatePost);
-
-router.patch('/:id', verifyToken, patchPost);
-
+router.post('/', verifyToken, upload.single('image'), createPost);
+router.put('/:id', verifyToken, upload.single('image'), updatePost);
+router.patch('/:id', verifyToken, upload.single('image'), patchPost);
 router.delete('/:id', verifyToken, deletePost);
 
 export default router;
