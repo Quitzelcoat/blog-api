@@ -9,11 +9,20 @@ function NewPost({ token }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const editorRef = useRef(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newPost = { title, content, published: false };
-    await createPost(newPost, token);
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('published', 'false'); // backend will coerce string
+    if (imageFile) {
+      formData.append('image', imageFile); // must match upload.single('image')
+    }
+
+    await createPost(formData, token);
     window.location.href = '/posts';
   };
 
@@ -127,6 +136,19 @@ function NewPost({ token }) {
                 onInput={(e) => setContent(e.currentTarget.innerHTML)}
                 placeholder="Start writing your post..."
                 suppressContentEditableWarning={true}
+              />
+            </div>
+
+            {/* Image upload */}
+            <div className={styles.field}>
+              <label className={styles.label}>Cover image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) setImageFile(file);
+                }}
               />
             </div>
 

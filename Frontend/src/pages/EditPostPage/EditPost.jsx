@@ -11,6 +11,8 @@ function EditPost({ token }) {
   const [content, setContent] = useState('');
   const editorRef = useRef(null);
 
+  const [imageFile, setImageFile] = useState(null);
+
   useEffect(() => {
     async function getPost() {
       const posts = await fetchPosts();
@@ -25,8 +27,16 @@ function EditPost({ token }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedPost = { title, content };
-    await updatePost(id, updatedPost, token);
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+
+    await updatePost(id, formData, token);
     window.location.href = '/posts';
   };
 
@@ -130,6 +140,19 @@ function EditPost({ token }) {
                 onInput={(e) => setContent(e.currentTarget.innerHTML)}
                 suppressContentEditableWarning={true}
                 dangerouslySetInnerHTML={{ __html: content }}
+              />
+            </div>
+
+            {/* Image upload (optional) */}
+            <div className={styles.field}>
+              <label className={styles.label}>Cover image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) setImageFile(file);
+                }}
               />
             </div>
 

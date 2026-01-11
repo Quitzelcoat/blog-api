@@ -72,6 +72,15 @@ function PostDetail({ token, isLoggedIn, userId }) {
         {/* Main content */}
         <div className={styles.content}>
           <h1 className={styles.title}>{post.title}</h1>
+
+          {post.imageUrl && (
+            <img
+              src={post.imageUrl}
+              alt={post.title}
+              className={styles.coverImage} // add CSS if you want
+            />
+          )}
+
           <div
             className={styles.body}
             dangerouslySetInnerHTML={{ __html: post.content }}

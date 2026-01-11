@@ -239,6 +239,40 @@
   background-color: #2e4a62;
 }
 
+/* File input inside field */
+.field input[type='file'] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-subtle);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+    background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.field input[type='file']::file-selector-button {
+  padding: 8px 14px;
+  margin-right: 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.field input[type='file']::file-selector-button:hover {
+  background-color: var(--bg-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .header {
