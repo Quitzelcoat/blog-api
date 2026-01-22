@@ -1,5 +1,5 @@
 .page {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: var(--bg-primary);
   padding: 0 5vw 64px;
 }
@@ -70,7 +70,9 @@
   border-radius: var(--radius-pill);
   text-decoration: none;
   box-shadow: 0 8px 22px rgba(8, 18, 28, 0.25);
-  transition: transform var(--transition-med), box-shadow var(--transition-med),
+  transition:
+    transform var(--transition-med),
+    box-shadow var(--transition-med),
     opacity var(--transition-fast);
 }
 
@@ -180,8 +182,10 @@ html.dark .primaryButton {
   text-decoration: none;
   cursor: pointer;
   box-shadow: var(--shadow-soft);
-  transition: transform var(--transition-fast),
-    box-shadow var(--transition-fast), background-color var(--transition-fast),
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast),
     border-color var(--transition-fast);
 }
 
@@ -217,8 +221,10 @@ html.dark .primaryButton {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform var(--transition-fast),
-    box-shadow var(--transition-fast), background-color var(--transition-fast),
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast),
     border-color var(--transition-fast);
 }
 

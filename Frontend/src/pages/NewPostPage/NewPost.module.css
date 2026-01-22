@@ -1,5 +1,5 @@
 .page {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: var(--bg-primary);
   padding: 0 5vw 64px;
 }
@@ -249,8 +249,10 @@
   color: var(--text-secondary);
   font-size: 13px;
   cursor: pointer;
-  transition: border-color var(--transition-fast),
-    background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .field input[type='file']::file-selector-button {
@@ -263,8 +265,10 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color var(--transition-fast),
-    transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .field input[type='file']::file-selector-button:hover {

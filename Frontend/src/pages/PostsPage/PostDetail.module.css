@@ -1,5 +1,5 @@
 .page {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: var(--bg-primary);
   padding: 0 5vw 64px;
 }
@@ -27,7 +27,9 @@
   text-decoration: none;
   padding: 6px 10px;
   border-radius: 999px;
-  transition: background-color 150ms ease-out, color 150ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out;
   width: fit-content;
 }
 
